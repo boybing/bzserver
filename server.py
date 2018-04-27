@@ -14,7 +14,7 @@ class HTTPServer_RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write("Hello World !".encode())
 
 def run():
-    port = 8000
+    port = 80
     print('starting server, port', port)
 
     # Server settings
