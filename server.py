@@ -7,11 +7,14 @@ class HTTPServer_RequestHandler(BaseHTTPRequestHandler):
     # GET
     def do_GET(self):
         if self.path == "/":
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            # Send the html message
-            self.wfile.write("Hello World !".encode())
+            try:
+                self.send_response(200)
+                self.send_header('Content-type', 'text/html')
+                self.end_headers()
+                # Send the html message
+                self.wfile.write("Hello World !".encode())
+            except:
+                self.send_error(404, "File not found")
 
 def run():
     port = 80
