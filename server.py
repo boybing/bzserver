@@ -17,7 +17,7 @@ class HTTPServer_RequestHandler(BaseHTTPRequestHandler):
                 self.send_error(404, "File not found")
 
 def run():
-    port = 80
+    port = 8000
     print('starting server, port', port)
 
     # Server settings
