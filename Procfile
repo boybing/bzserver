@@ -1,1 +1,1 @@
-web: python server.py runserver 0.0.0.0:8000
+web: gunicorn testproject.wsgi --access-logfile -
