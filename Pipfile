@@ -1,16 +1,12 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
-[dev-packages]
-
-
+[requires]
+python_full_version = "2.7.14"
 
 [packages]
-
 django = "*"
 dj-database-url = "*"
 whitenoise = "*"
