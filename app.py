@@ -23,7 +23,8 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configur
 def home():
     """Render website's home page."""
     mongo.insert([{'xx':'xx'}])
-    return "Hello World !".encode()
+    # return "Hello World !".encode()
+    return os.environ['USER']
 
 
 @app.route('/about/')
