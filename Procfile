@@ -1,1 +1,1 @@
-web: gunicorn manage:bzserver
+web: gunicorn manage:app
