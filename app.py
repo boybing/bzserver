@@ -13,6 +13,7 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
+db=os.environ('DB_LINK')
 
 
 ###
@@ -22,7 +23,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configur
 @app.route('/')
 def home():
     """Render website's home page."""
-    mongo.insert([{'xx':'xx'}])
+    mongo.insert(db,[{'xx':'xx'}])
     return "Hello World !".encode()
 
 
