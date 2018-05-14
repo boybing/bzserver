@@ -24,7 +24,7 @@ def home():
     """Render website's home page."""
     #mongo.insert([{'xx':'xx'}])
     app.config['DB_LINK'] = os.environ.get('DB_LINK')
-    print app
+    print app.config
     return "Hello World !".encode()
 
 
