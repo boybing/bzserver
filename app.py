@@ -7,7 +7,7 @@ This file creates your application.
 """
 
 import os
-import mongo.py
+import mongo
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -22,6 +22,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configur
 @app.route('/')
 def home():
     """Render website's home page."""
+    mongo.insert([{'xx':'xx'}])
     return "Hello World !".encode()
 
 
