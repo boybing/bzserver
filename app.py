@@ -23,9 +23,9 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configur
 def home():
     """Render website's home page."""
     db=app.config['DB_LINK']
-    mongo.insert(db,[{'xx':'xx'}])
-    app.config['DB_LINK'] = os.environ.get('DB_LINK')
-    print app.config
+    #mongo.insert(db,[{'xx':'xx'}])
+    #app.config['DB_LINK'] = os.environ.get('DB_LINK')
+    #print app.config
     print app.config['DB_LINK']
     
     return "Hello World !".encode()
