@@ -26,7 +26,7 @@ def home():
     #mongo.insert(db,[{'xx':'xx'}])
     #app.config['DB_LINK'] = os.environ.get('DB_LINK')
     print app.config
-    #print app.config[DB_LINK]
+    print app.config['SECRET_KEY']
     
     return "Hello World !".encode()
 
