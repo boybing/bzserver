@@ -24,7 +24,6 @@ def home():
     """Render website's home page."""
     # mongo.insert([{'xx':'xx'}])
     print app.config['DDDD']
-    print app.config['D']
     #db=app.config['DB_LINK']
     mongo.insert(app.config['DB_LINK'],[{'xx':'xx'}])
     #app.config['DB_LINK'] = os.environ.get('DB_LINK')
