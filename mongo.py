@@ -1,8 +1,8 @@
 from  pymongo  import  MongoClient
 import os
 
-def insert(data):
-        client = MongoClient(os.environ['DB_LINK'])
+def insert(dblink,data):
+        client = MongoClient(dblink)
         db= client.bzbz.dazhong
         print(db.insert(data))
 
