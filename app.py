@@ -25,7 +25,7 @@ def home():
     # mongo.insert([{'xx':'xx'}])
     print app.config['DDDD']
     #db=app.config['DB_LINK']
-    #mongo.insert(db,[{'xx':'xx'}])
+    mongo.insert(app.config['DDDD'],[{'xx':'xx'}])
     #app.config['DB_LINK'] = os.environ.get('DB_LINK')
     print app.config['SECRET_KEY']
 
