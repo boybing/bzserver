@@ -13,8 +13,7 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
 app.config['DDDD']=os.environ['DDDD']
-app.config['B_LINK']=os.environ['B_LINK']
-
+app.config['DB_LINK']=os.environ['DB_LINK']
 
 ###
 # Routing for your application.
@@ -25,7 +24,7 @@ def home():
     """Render website's home page."""
     # mongo.insert([{'xx':'xx'}])
     print app.config['DDDD']
-    print app.config['DB_LINK']
+    print app.config['D']
     #db=app.config['DB_LINK']
     mongo.insert(app.config['DB_LINK'],[{'xx':'xx'}])
     #app.config['DB_LINK'] = os.environ.get('DB_LINK')
