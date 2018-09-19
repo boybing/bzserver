@@ -25,12 +25,11 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configur
 # Routing for your application.
 ###
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     """Render website's home page."""
     # mongo.insert(app.config['DB_LINK'],[{'xx':'xx'}])
-
-    return "Hello World !".encode()
+    return render_template("if.html")
 
 @app.route('/d/<id>')
 def ariticle(id):
