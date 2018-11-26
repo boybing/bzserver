@@ -40,9 +40,9 @@ def getBeijinTime():
 def home():
     """Render website's home page."""
     # print(getBeijinTime())
-    # tm=getBeijinTime()
+    tm=getBeijinTime()
     # mongo.insert(app.config['DB_LINK'], [{'time': tm}])
-    return jsonify("交易成功")
+    return tm
 
 
 ###
