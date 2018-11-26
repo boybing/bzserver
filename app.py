@@ -26,7 +26,7 @@ app.config['JSON_AS_ASCII'] = False
 
 def getBeijinTime():
     try:
-        r = requests.get('http://cgi.im.qq.com/cgi-bin/cgi_svrtime')
+        r = requests.get('http://quan.suning.com/getSysTime.do')
         if r.status_code == 200:
             return r.text
         else:
@@ -41,7 +41,7 @@ def home():
     """Render website's home page."""
     # print(getBeijinTime())
     tm=getBeijinTime()
-    # mongo.insert(app.config['DB_LINK'], [{'time': tm}])
+    mongo.insert(app.config['DB_LINK'], [{'time': tm}])
     return jsonify(tm)
 
 
