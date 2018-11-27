@@ -1,5 +1,6 @@
 # coding=utf-8
 
+import os
 import mongo
 from flask import Flask, render_template, request, jsonify
 import hashlib
@@ -41,7 +42,7 @@ def home():
     """Render website's home page."""
     try:
         jj=json.loads(request.json)
-        print jj.get("time")
+        print (jj.get("time"))
 
         if getMd5(jj.get("time"), jj.get("token")):
             mongo.insert(app.config['DB_LINK'], jj)
