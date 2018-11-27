@@ -1,59 +1,55 @@
-"""
-Flask Documentation:     http://flask.pocoo.org/docs/
-Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
-Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
+# coding=utf-8
 
-This file creates your application.
-"""
-
-import os
 import mongo
-import requests
-
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, request, jsonify
+import hashlib
+import json
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
-app.config['JSON_AS_ASCII'] = False
 
+# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
+app.config['DB_LINK']=os.environ['DB_LINK']
+app.config['KSTR']=os.environ['KSTR']
 
-# app.config['DDDD']=os.environ['DDDD']
-# app.config['DB_LINK']=os.environ['DB_LINK']
-
-###
+###`
 # Routing for your application.
 ###
 
-def getBeijinTime():
+def get_token(str, token):
+    retRes = False
+    m1 = hashlib.md5()
+    m1.update(str.encode("utf-8"))
+    tk = m1.hexdigest()
+    if tk == token:
+        retRes = True
+    print (token)
+    print (tk)
+    return retRes
+
+# 校对token
+def getMd5(time, token):
     try:
-        r = requests.get('http://quan.suning.com/getSysTime.do')
-        if r.status_code == 200:
-            return r.text
-        else:
-            return "获取时间失败"
-
+        tmpStr = time + app.config['KSTR']
+        print (tmpStr)
+        return get_token(tmpStr, token)
     except:
-        return "获取时间失败"
+        raise RuntimeError('Token错误')
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/addData', methods=['POST'])
 def home():
     """Render website's home page."""
-    # print(getBeijinTime())
-    # tm=getBeijinTime()
-    # mongo.insert(app.config['DB_LINK'], [{'time': tm}])
-    return "hello world!"
+    try:
+        jj=json.loads(request.json)
+        print jj.get("time")
 
-
-###
-# The functions below should be applicable to all Flask apps.
-###
-
-# @app.route('/<file_name>.txt')
-# def send_text_file(file_name):
-#     """Send your static text file."""
-#     file_dot_text = file_name + '.txt'
-#     return app.send_static_file(file_dot_text)
+        if getMd5(jj.get("time"), jj.get("token")):
+            mongo.insert(app.config['DB_LINK'], jj)
+            return jsonify(code=200, status=0, message='ok')
+        else:
+            raise RuntimeError("系统错误")
+    except:
+        return render_template('404.html'), 404
 
 
 @app.after_request
@@ -74,4 +70,4 @@ def page_not_found(error):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
